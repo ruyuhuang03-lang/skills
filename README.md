@@ -1,6 +1,6 @@
 # Project Status Manager
 
-一个用于 Codex 的项目状态管理 skill。它通过维护项目根目录中的 `PROJECT_STATUS.md`，让不同对话能够快速了解项目目标、进度、关键决策、风险和下一步行动。
+一个用于 Codex 的项目状态管理 skill。通过维护项目根目录中的 `PROJECT_STATUS.md`，让不同对话能够快速了解项目目标、进度、关键决策、风险和下一步行动。
 
 ## 功能
 
