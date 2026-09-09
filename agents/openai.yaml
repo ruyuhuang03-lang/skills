@@ -1,0 +1,4 @@
+interface:
+  display_name: "项目状态管理"
+  short_description: "维护跨对话共享的项目状态、关键决策、风险、待办事项与交接摘要"
+  default_prompt: "使用 $project-status-manager 初始化或更新本项目的 PROJECT_STATUS.md。"
