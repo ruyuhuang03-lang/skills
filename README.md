@@ -1,68 +1,67 @@
-# Project Status Manager
+# Skills
 
-一个用于 Codex 的项目状态管理 skill。通过维护项目根目录中的 `PROJECT_STATUS.md`，让不同对话能够快速了解项目目标、进度、关键决策、风险和下一步行动。
+这里收集我为 Codex 创建的可复用 Skills。每个一级子目录都是一个独立、可安装的 Skill。
 
-## 功能
+## Skills 目录
 
-- 初始化结构清晰的 `PROJECT_STATUS.md`
-- 读取并概括项目当前状态
-- 在完成有效工作后更新进度、决策、阻塞项和后续行动
-- 为跨对话协作生成简洁的交接摘要
-- 在并发修改存在冲突时避免直接覆盖，并返回可供合并的 handoff
-
-此 skill 会区分两类信息：
-
-- `AGENTS.md`：存放 Codex 应遵循的长期工作规则
-- `PROJECT_STATUS.md`：存放项目当前的事实状态
+| Skill | 用途 |
+| --- | --- |
+| [`project-status-manager`](./project-status-manager/) | 通过 `PROJECT_STATUS.md` 维护跨对话共享的项目目标、进度、决策、风险与交接信息。 |
+| [`github-open-source-evaluator`](./github-open-source-evaluator/) | 在编码前调研 GitHub 开源候选，判断维护状态、部署难度、复用价值、二开适配度，并给出技术路线与最简 MVP。 |
 
 ## 安装
 
-将仓库克隆到 Codex skills 目录：
+先克隆本仓库：
 
 ```bash
-mkdir -p ~/.codex/skills
-git clone https://github.com/ruyuhuang03-lang/project-status-manager.git \
+mkdir -p ~/.codex/skill-repos ~/.codex/skills
+git clone https://github.com/ruyuhuang03-lang/skills.git \
+  ~/.codex/skill-repos/ruyuhuang03-skills
+```
+
+再按需把单个 Skill 链接到 Codex Skills 目录：
+
+```bash
+ln -s ~/.codex/skill-repos/ruyuhuang03-skills/project-status-manager \
   ~/.codex/skills/project-status-manager
+
+ln -s ~/.codex/skill-repos/ruyuhuang03-skills/github-open-source-evaluator \
+  ~/.codex/skills/github-open-source-evaluator
 ```
 
-如果已经安装，可以在 skill 目录中拉取最新版本：
+如果目标路径已经存在，请先保留现有目录，并改用复制或手动合并；不要直接覆盖。
+
+## 更新
 
 ```bash
-git -C ~/.codex/skills/project-status-manager pull
+git -C ~/.codex/skill-repos/ruyuhuang03-skills pull
 ```
+
+使用符号链接安装时，仓库更新后 Skills 会同步更新。
 
 ## 使用示例
-
-在 Codex 中使用 `$project-status-manager`，例如：
 
 ```text
 使用 $project-status-manager 初始化当前项目的状态跟踪。
 ```
 
 ```text
-使用 $project-status-manager 总结当前项目状态，并记录这次完成的工作。
+使用 $github-open-source-evaluator，帮我调研适合开发 XXX 的 GitHub 开源项目。
 ```
-
-```text
-使用 $project-status-manager 为下一个对话生成交接摘要。
-```
-
-## 工作原则
-
-- 修改前先确认准确的项目根目录
-- 保留已有的用户内容，只更新与当前任务相关的部分
-- 只记录已验证的结果、明确决策、真实阻塞和具体下一步
-- 不保存完整聊天记录、凭据、令牌或其他敏感信息
-- 编辑前重新读取最新状态，避免覆盖其他对话的修改
 
 ## 仓库结构
 
 ```text
-project-status-manager/
-├── SKILL.md             # Skill 的核心指令
-├── README.md            # 项目说明与安装方法
-└── agents/
-    └── openai.yaml      # Codex 界面元数据与默认提示词
+skills/
+├── README.md
+├── project-status-manager/
+│   ├── SKILL.md
+│   └── agents/
+│       └── openai.yaml
+└── github-open-source-evaluator/
+    ├── SKILL.md
+    └── agents/
+        └── openai.yaml
 ```
 
 ## 许可

@@ -1,0 +1,4 @@
+interface:
+  display_name: "GitHub 开源项目选型"
+  short_description: "调研开源候选，判断复用、二开或自研路线"
+  default_prompt: "使用 $github-open-source-evaluator 为我的产品目标调研 GitHub 开源项目，并给出选型建议和最简 MVP。"
